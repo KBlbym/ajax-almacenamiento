@@ -1,6 +1,10 @@
 const URL_BASE = "/api/";
 let companiesTable = document.querySelector("#companies");
 let tbdoy = document.querySelector("#companies tbody");
+const NAME = document.querySelector("#name");
+const INDUSTRY = document.querySelector("#industry");
+const SECTOR = document.querySelector("#sector");
+const CAPITAL = document.querySelector("#capital");
 
 function obtenerCompanies() {
     fetch(URL_BASE+"companies")
@@ -23,4 +27,28 @@ function obtenerCompanies() {
         });
     });
 }
+
+document.getElementsByName('form_create')[0].addEventListener('submit', addCompany);
+
+function addCompany() {
+    let company = {
+      "name": NAME.value,
+      "industry": INDUSTRY.value,
+      "sector": SECTOR.value,
+      "capital": CAPITAL.value,
+    };
+    console.log(company)
+    fetch(URL_BASE + "companies", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(company)
+    })
+    .then(res => res.json())
+    .then(json => {
+      console.log(json);
+      obtenerCompanies();
+    });
+  }
 obtenerCompanies();
