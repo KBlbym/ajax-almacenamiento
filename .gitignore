@@ -1,3 +1,8 @@
+*.pdf
+public/img/
+routes/
+Examen2023.postman_collection.json
+data/
 # Logs
 logs
 *.log
